@@ -1,0 +1,19 @@
+LangGraph StateGraph
+
+StateGraph is the primary graph class in LangGraph.
+It requires a state schema — a TypedDict that defines what data 
+flows through the graph.
+
+Every node in a StateGraph receives the full current state as input
+and returns a dict of updates. LangGraph merges these updates into 
+the state using a reducer. The default reducer overwrites the field.
+To append instead of overwrite, use Annotated with operator.add.
+
+StateGraph supports three types of edges:
+Regular edges always go from node A to node B.
+Conditional edges use a function to decide the next node at runtime.
+Entry point sets which node runs first.
+
+MessageGraph is a subclass of StateGraph where the state is always
+a list of messages. It is simpler but less flexible than StateGraph.
+Use StateGraph when you need custom state fields beyond messages.

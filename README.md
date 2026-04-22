@@ -97,8 +97,7 @@ Task type could require parsing or classification logic inside the node. `Comman
 
 ## Day 4 — (Skipped)
 
-LangSmith tracing integration was planned but not implemented this week.
-
+In folder day2
 ---
 
 ## Day 5 — Human-in-the-loop + persistence: async pause and resume

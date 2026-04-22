@@ -1,0 +1,18 @@
+LangGraph Checkpoints
+
+A checkpoint is a snapshot of the graph state at a specific point during execution.
+Checkpoints are saved by a checkpointer after every node execution.
+They enable three key features: memory persistence across sessions, 
+error recovery by resuming from the last saved state, and time travel 
+by rolling back to any previous checkpoint.
+
+LangGraph supports two checkpointers out of the box:
+MemorySaver stores checkpoints in memory — lost when process exits, 
+good for development and testing.
+PostgresSaver stores checkpoints in a PostgreSQL database — persists 
+across restarts, recommended for production use.
+
+To use a checkpointer, pass it to graph.compile():
+graph = builder.compile(checkpointer=PostgresSaver(conn))
+Each run is identified by a thread_id in the config:
+config = {"configurable": {"thread_id": "user-123"}}

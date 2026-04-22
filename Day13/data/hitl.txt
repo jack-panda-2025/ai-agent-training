@@ -1,0 +1,20 @@
+Human-in-the-Loop (HITL) in LangGraph
+
+Human-in-the-loop means pausing graph execution to wait for human 
+input or approval before continuing.
+
+LangGraph implements HITL using interrupt(). When a node calls 
+interrupt(), the graph saves its current state as a checkpoint and 
+pauses execution. The process can exit safely — state is persisted.
+When a human provides input, execution resumes from the checkpoint.
+
+This is different from input() blocking — interrupt() is async and 
+process-safe. The graph does not need to stay running while waiting.
+
+Common use cases for HITL:
+Approval workflows — human approves before agent takes action.
+Confidence threshold — trigger review when retrieval score is low.
+Sensitive operations — require human confirmation before execution.
+
+To resume after interrupt, invoke the graph with the same thread_id
+and pass the human's response as the input.
